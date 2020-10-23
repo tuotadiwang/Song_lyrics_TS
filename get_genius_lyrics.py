@@ -5,9 +5,7 @@ import os
 import re
 import pandas as pd
 
-# client_id = VqQs2ANcZR9jhS-PTAxPeKcjbBQKyqlObmKb1ADjgOt7aOyUNJmhD7f-Cnk5VAWz
-# client_secret = NETck97eyXfZ-LrZUxKkBNGhfzzcbK50CNroTjN2vQpQl-mk6g-7-d357ezBQSYy56l0W_-lB2ns5VHZB8_N1A
-access_token = 'q7XhzJuUCtiegzq8rIn4a_4E1P1l8UILLZTWTkYQln7SDKxR6Cr1VKhEwNtwP05t'
+access_token = '***' # access token of genius client
 base = "https://api.genius.com"
 
 def search_song(song_name, artist_name):
@@ -47,7 +45,7 @@ def get_song_lyric(song_api_path):
     return lyrics
 
 
-TS_songs = pd.read_csv('/Users/BettyX/Documents/Data/TS_songs/song_list.csv')
+TS_songs = pd.read_csv('/my_path/song_list.csv')
 string_columns = ['Song ', 'Artist(s) ', 'Writer(s) ', 'Album ', 'Ref. ']
 TS_songs[string_columns] = TS_songs[string_columns].astype('string')
 
@@ -93,4 +91,4 @@ for song in song_names:
 TS_songs['genius_path'] = song_paths
 TS_songs['lyrics'] = song_lyrics
 
-TS_songs.to_csv('/Users/BettyX/Documents/Data/TS_songs/song_lyrics.csv')
+TS_songs.to_csv('/my_path/song_lyrics.csv')
