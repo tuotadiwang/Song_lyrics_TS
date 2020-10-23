@@ -8,7 +8,6 @@ song_url = 'https://en.wikipedia.org/wiki/List_of_songs_recorded_by_Taylor_Swift
 song_doc = requests.get(song_url).text
 
 soup_song = BeautifulSoup(song_doc, 'lxml')
-# soup_album = BeautifulSoup(album_doc, 'lxml')
 # print (soup.prettify())
 
 song_table = soup_song.find_all('table', {'class': 'wikitable sortable plainrowheaders'})[0] # one-member array
@@ -60,7 +59,7 @@ df = process_rows(rows, nrows, ncols)
 df.replace(r'\s+|\\n', ' ', regex=True, inplace=True)
 headers = df.iloc[0]
 new_df = pd.DataFrame(df.values[1:], columns=headers)
-new_df.to_csv('/Users/BettyX/Documents/Data/TS_songs/song_list.csv')
+new_df.to_csv('/my_path/song_list.csv')
 
 
 # albums
