@@ -55,21 +55,6 @@ TS_songs['Song '][TS_songs['Song ']==' "Macavity" (cover) '] = "Macavity"
 TS_songs = TS_songs[TS_songs['Song '] !='"American Girl" (cover) ']
 
 
-for index, row in TS_songs.iterrows():
-    song = row['Song ']
-    search_name = None
-    print(song)
-    if 'album' in song:
-        search_name = re.findall('"([^"]*)"', song)[0]
-    if re.findall('single', song):
-        search_name = re.sub(r'\([^)]*\)', '', song)
-    if re.findall('remix', song):
-        search_name = re.sub(r'\([^)]*\)', '', song) + 'remix'
-    else:
-        search_name = song
-    print(search_name)
-
-
 song_names = TS_songs['Song ']
 song_paths =[]
 song_lyrics = []
