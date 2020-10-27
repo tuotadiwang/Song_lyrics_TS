@@ -5,7 +5,7 @@ from wordcloud import WordCloud, STOPWORDS
 
 
 # all lyrics
-TS_lyrics = pd.read_csv('/Users/BettyX/Documents/Data/TS_songs/song_lyrics.csv')
+TS_lyrics = pd.read_csv('/my_path/song_lyrics.csv')
 TS_lyrics = TS_lyrics.rename(columns={'Song ': 'song', 'Artist(s) ': 'artists', 'Writer(s) ': 'writers', 'Album ': 'album', 'Year ': 'year', 'Ref. ': 'ref'})
 TS_lyrics['year'] = TS_lyrics['year'].astype(int)
 TS_lyrics['lyrics'] = TS_lyrics['lyrics'].astype('string')
@@ -14,16 +14,16 @@ TS_lyrics['word_count'] = TS_lyrics['lyrics'].apply(lambda x: x.split(' ')).appl
 
 words_per_year = TS_lyrics.groupby('year')['word_count'].mean()
 words_per_year.plot.bar(x='year', y='word_count', title='Average number of words per song in each year')
-# plt.show()
-plt.savefig('/Users/BettyX/Documents/Data/TS_songs/all_length_year.png')
+plt.show()
+plt.savefig('/my_path/all_length_year.png')
 
 
 words_per_album = TS_lyrics.groupby('album').mean().sort_values('year', ascending=True)['word_count']
 words_per_album.plot.bar(x='year', y='word_count', title='Average number of words per song in each album')
 plt.xticks(fontsize=8)
 plt.tight_layout()
-# plt.show()
-plt.savefig('/Users/BettyX/Documents/Data/TS_songs/all_length_album.png')
+plt.show()
+plt.savefig('/my_path/all_length_album.png')
 
 # word cloud for the song lyrics
 all_lyrics = ' '.join(TS_lyrics.lyrics.tolist())
@@ -32,8 +32,8 @@ wordcloud_all_lyrics = WordCloud(stopwords=stopwords,background_color='white').g
 plt.figure()
 plt.imshow(wordcloud_all_lyrics, interpolation='bilinear')
 plt.axis('off')
-# plt.show()
-wordcloud_all_lyrics.to_file('/Users/BettyX/Documents/Data/TS_songs/all_lyrics.png')
+plt.show()
+wordcloud_all_lyrics.to_file('/my_path/all_lyrics.png')
 
 
 
@@ -62,17 +62,17 @@ TS_lyrics['release'] = release
 TS_regular_lyrics = TS_lyrics[TS_lyrics['regular']==True]
 
 words_per_year = TS_regular_lyrics.groupby('year')['word_count'].mean()
-words_per_year.plot.bar(x='year', y='word_count', title='Average number of words per song in each year (regular album & singles)')
-# plt.show()
-plt.savefig('/Users/BettyX/Documents/Data/TS_songs/regular_length_year.png')
+words_per_year.plot.bar(x='year', y='word_count', title='Average number of words per song in each year')
+plt.show()
+plt.savefig('/my_path/regular_length_year.png')
 
 
 words_per_album = TS_regular_lyrics.groupby('release').mean().sort_values('year', ascending=True)['word_count']
 words_per_album.plot.bar(x='year', y='word_count', title='Average number of words per song in each album (regular album & singles)')
 plt.xticks(fontsize=8)
 plt.tight_layout()
-# plt.show()
-plt.savefig('/Users/BettyX/Documents/Data/TS_songs/all_length_album.png')
+plt.show()
+plt.savefig('/my_path/all_length_album.png')
 
 # word cloud for the song lyrics
 all_lyrics = ' '.join(TS_regular_lyrics.lyrics.tolist())
@@ -81,8 +81,8 @@ wordcloud_regular_lyrics = WordCloud(stopwords=stopwords,background_color='white
 plt.figure()
 plt.imshow(wordcloud_regular_lyrics, interpolation='bilinear')
 plt.axis('off')
-# plt.show()
-wordcloud_regular_lyrics.to_file('/Users/BettyX/Documents/Data/TS_songs/regular_lyrics.png')
+plt.show()
+wordcloud_regular_lyrics.to_file('/my_path/regular_lyrics.png')
 # Woo, a lot of (sad) love stories: never know love
 
 
@@ -99,6 +99,6 @@ def draw_wordcloud(text):
 for album in set(TS_regular_lyrics.release):
     text = ' '.join(TS_regular_lyrics[TS_regular_lyrics['release'] == album].lyrics.tolist())
     wordcloud_album_lyrics = draw_wordcloud(text)
-    wordcloud_album_lyrics.to_file('/Users/BettyX/Documents/Data/TS_songs/{}_lyrics.png'.format(album))
+    wordcloud_album_lyrics.to_file('/my_path/{}_lyrics.png'.format(album))
     plt.clf()
 
